@@ -1,7 +1,7 @@
 
-const authors = require('./dummyAuthors.json').Authors;
 
-const resolvers = {
+let authors = require('./dummyAuthors.json').Authors;
+exports.resolvers = {
 
     Query: {
         authors: () => {
@@ -17,5 +17,4 @@ const resolvers = {
 
         }
     }
-};
-exports.resolvers = resolvers;
+}

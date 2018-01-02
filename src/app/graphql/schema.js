@@ -1,6 +1,24 @@
+const authors = require('./../graphql/dummyAuthors.json').Authors;
+let assert = require('assert');
+let makeExecutableSchema = require('graphql-tools').makeExecutableSchema;
 
-let makeExecutableSchema  = require('graphql-tools').makeExecutableSchema;
-let  resolver  = require('./resolvers');
+const resolvers = {
+
+  Query: {
+    authors: () => {
+      // TODO : get author data from database here i am doing dummy author json
+      let promise = new Promise((resolve, reject) => {
+
+        setTimeout(() => {
+          resolve(authors);
+        }, 10)
+
+      })
+      return promise;
+
+    }
+  }
+};
 
 const typeDefs = `
 type Author {
@@ -11,8 +29,8 @@ type Author {
 type Query {authors: [Author]}`
 
 const schema = makeExecutableSchema({
-    typeDefs,
-    resolver,
-  });
+  typeDefs,
+  resolvers
+});
 
-exports.schema =  schema;
+exports.schema = schema;
